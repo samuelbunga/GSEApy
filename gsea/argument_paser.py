@@ -2,6 +2,7 @@ import os
 import sys
 import logging
 import argparse
+from os.path import realpath
 
 def parse_arguments():
     logger = logging.getLogger('Verifying provided paths')
@@ -17,9 +18,9 @@ def parse_arguments():
                         help='Path to database folder', required=True)
     args = parser.parse_args()
 
-    if all(os.path.isdir(args.input),
-           os.path.isdir(args.output),
-           os.path.isdir(args.database)):
+    if all((os.path.isdir(realpath(args.input)),
+           os.path.isdir(realpath(args.output)),
+           os.path.isdir(realpath(args.database))):
         logger.info('All paths exists!')
         return args
     else:
