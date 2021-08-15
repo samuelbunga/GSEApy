@@ -5,7 +5,8 @@ import argparse
 from os.path import realpath
 
 def parse_arguments():
-    logger = logging.getLogger('Verifying provided paths')
+    logger = logging.getLogger()
+    logger.info('Verifying paths provided')
     parser = argparse.ArgumentParser(description='Please provide input and output paths')
 
     parser.add_argument('-i', '--input', dest='input', type=str,
@@ -20,10 +21,10 @@ def parse_arguments():
 
     if all((os.path.isdir(realpath(args.input)),
            os.path.isdir(realpath(args.output)),
-           os.path.isdir(realpath(args.database))):
+           os.path.isdir(realpath(args.database)))):
         logger.info('All paths exists!')
         return args
     else:
-        logger.info("Provided paths don't exist")
+        logger.error("Provided paths don't exist")
         sys.exit()
 
