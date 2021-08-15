@@ -26,5 +26,3 @@ def parse_arguments():
         logger.info("Provided paths don't exist")
         sys.exit()
 
-parse_arguments()
-
