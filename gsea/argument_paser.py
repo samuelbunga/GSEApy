@@ -1,4 +1,5 @@
 import os
+import sys
 import logging
 import argparse
 
@@ -16,12 +17,14 @@ def parse_arguments():
                         help='Path to database folder', required=True)
     args = parser.parse_args()
 
-    if all(os.path.isdir(args.input), os.path.isdir(args.output), os.path.isdir(args.database)):
+    if all(os.path.isdir(args.input),
+           os.path.isdir(args.output),
+           os.path.isdir(args.database)):
         logger.info('All paths exists!')
         return args
     else:
         logger.info("Provided paths don't exist")
-        break
+        sys.exit()
 
-
+parse_arguments()
 
