@@ -10,6 +10,12 @@ from indra.databases.hgnc_client import get_hgnc_from_mouse, get_hgnc_name
 
 
 
+def run_pipeline(INDIR, OUTDIR, FORMAT, DB):
+    if FORMAT == 'd':
+        format_deseq2(INDIR, OUTDIR, DB)
+
+    elif FORMAT == 's':
+        format_seurat(INDIR, OUTDIR, DB)
 
 
 def mgi_to_hgnc_name(gene_list):
@@ -40,8 +46,5 @@ if __name__ == '__main__':
     FORMAT = args.file_type
     DB = args.database
 
-    if FORMAT == 'd':
-        format_deseq2(INDIR, OUTDIR, DB)
-
-    elif FORMAT == 's':
-        format_seurat(INDIR, OUTDIR, DB)
+    # Run the main pipeline
+    run_pipeline(INDIR, OUTDIR, FORMAT, DB)
