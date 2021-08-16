@@ -22,6 +22,8 @@
 .DS_Store
 .AppleDouble
 .LSOverride
+*.pdf
+*.csv
 
 # Icon must end with two \r
 Icon
