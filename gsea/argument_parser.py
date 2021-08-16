@@ -16,7 +16,7 @@ def parse_arguments():
                         help='Path to output folder', required=True)
 
     parser.add_argument('-db', '--database', dest='database', type=str,
-                        help='Path to database folder', required=True)
+                        help='Path to database', required=True)
 
     parser.add_argument('-f', '--format', dest='file_type', type=str,
                         help='Type of input files (s = Seurat or d = DESeq2)', required=True)
@@ -24,10 +24,10 @@ def parse_arguments():
 
     if all((os.path.isdir(realpath(args.input)),
            os.path.isdir(realpath(args.output)),
-           os.path.isdir(realpath(args.database)))):
+           os.path.isdir(os.path.dirname(realpath(args.database))))):
         logger.info('All paths exists!')
+
         return args
     else:
         logger.error("Provided paths don't exist")
         sys.exit()
-
