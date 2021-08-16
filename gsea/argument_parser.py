@@ -17,6 +17,9 @@ def parse_arguments():
 
     parser.add_argument('-db', '--database', dest='database', type=str,
                         help='Path to database folder', required=True)
+
+    parser.add_argument('-f', '--format', dest='file_type', type=str,
+                        help='Type of input files (s = Seurat or d = DESeq2)', required=True)
     args = parser.parse_args()
 
     if all((os.path.isdir(realpath(args.input)),
