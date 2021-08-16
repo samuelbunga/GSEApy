@@ -38,10 +38,11 @@ def make_rnk_files(files, DB):
                        os.path.join(WD, 'outputs', DB, f_name)
 '''
 
-def make_rnk(genes, padj, f, outdir):
+def make_rnk(genes, p_adj, f, outdir):
     logger.info("Creating rank file for {}".format(os.path.basename(f)))
     # create rank dir
-    os.mkdir(os.path.join(outdir, 'rnk'), exist_ok=True)
+    if not os.path.isdir(os.path.join(outdir, 'rnk')):
+        os.mkdir(os.path.join(outdir, 'rnk'))
 
     fname = os.path.basename(f)
 
@@ -54,12 +55,13 @@ def make_rnk(genes, padj, f, outdir):
                     sep='\t',
                     header=False)
     logger.info("Success!")
-    l
+
 
 def format_deseq2(indir, outdir):
     files = [f for f in os.listdir(os.path.realpath(indir)) if re.search(r'.*csv', f)]
 
     for f in files:
+        f = os.path.join(indir, f)
         logger.info("Processing {}".format(os.path.basename(f)))
         df = pd.read_csv(os.path.realpath(f), header=0, index_col=0)
 
@@ -68,7 +70,7 @@ def format_deseq2(indir, outdir):
             p_adj.append(c[5])
             genes.append(r)
 
-        make_rnk(genes, padj, f, outdir)
+        make_rnk(genes, p_adj, f, outdir)
 
 
 
