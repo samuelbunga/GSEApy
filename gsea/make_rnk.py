@@ -47,12 +47,12 @@ def format_deseq2(indir, outdir, db):
         logger.info("Processing {}".format(os.path.basename(f)))
         df = pd.read_csv(os.path.realpath(f), header=0, index_col=0)
 
-        genes, p_adj = [], []
+        genes, stat = [], []
         for r, c in df.iterrows():
-            p_adj.append(c[5])
+            stat.append(c[4])
             genes.append(r)
 
-        make_rnk(genes, p_adj, f, indir, outdir, db)
+        make_rnk(genes, stat, f, indir, outdir, db)
 
 
 def format_seurat(indir, outdir, db):
