@@ -49,7 +49,7 @@ def format_deseq2(indir, outdir, db):
 
         genes, stat = [], []
         for r, c in df.iterrows():
-            stat.append(c[4])
+            stat.append(c[3])
             genes.append(r)
 
         make_rnk(genes, stat, f, indir, outdir, db)
