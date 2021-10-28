@@ -2,6 +2,7 @@ import os
 import re
 import gseapy
 import logging
+import numpy as np
 import pandas as pd
 
 
@@ -49,7 +50,11 @@ def format_deseq2(indir, outdir, db):
 
         genes, stat = [], []
         for r, c in df.iterrows():
-            stat.append(c[3])
+            fcsign = np.sign(c[1])
+            logP = -np.log10(c[4])
+            metric = logP/fcsign
+            stat.append(metric)
+            #stat.append(c[3])
             genes.append(r)
 
         make_rnk(genes, stat, f, indir, outdir, db)
